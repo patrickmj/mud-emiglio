@@ -21,11 +21,10 @@ echo head(array('title'=>$pageTitle,'bodyclass' => 'collections browse'));
         <div class="collection">
             <h2><?php echo link_to_collection(); ?></h2>
             <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
-                <?php echo link_to_collection($collectionImage, array('class' => 'collection record-image')); ?>
+                <?php echo link_to_collection($collectionImage, array('class' => 'image')); ?>
             <?php endif; ?>
             <?php if (metadata('collection', array('Dublin Core', 'Description'))): ?>
             <div class="element">
-                <h3><?php echo __('Description'); ?></h3>
                 <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'), array('snippet'=>150))); ?></div>
             </div>
             <?php endif; ?>
