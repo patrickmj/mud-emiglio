@@ -8,47 +8,35 @@
 <?php endif; ?>
 
 <div id="primary">
-
-    <?php if (get_theme_option('Display Featured Item') !== '0'): ?>
-    <!-- Featured Item -->
-    <div id="featured-item" class="featured">
-        <h2><?php echo __('Featured Item'); ?></h2>
-        <?php echo random_featured_items(1); ?>
-    </div><!--end featured-item-->
-    <?php endif; ?>
-
-    <?php
-    $recentItems = get_theme_option('Homepage Recent Items');
-    if ($recentItems === null || $recentItems === ''):
-        $recentItems = 3;
-    else:
-        $recentItems = (int) $recentItems;
-    endif;
-    if ($recentItems):
-    ?>
-    <div id="recent-items">
-        <h2><?php echo __('Recently Added Items'); ?></h2>
-        <?php echo recent_items($recentItems); ?>
-        <p class="view-items-link"><a href="<?php echo html_escape(url('items')); ?>"><?php echo __('View All Items'); ?></a></p>
-    </div><!--end recent-items -->
-    <?php endif; ?>
-
+<?php echo $this->shortcodes('[carousel]')?>
 </div>
 <div id="secondary">
-    <?php if (get_theme_option('Display Featured Collection') !== '0'): ?>
-    <!-- Featured Collection -->
-    <div id="featured-collection" class="featured">
-        <h2><?php echo __('Featured Collection'); ?></h2>
-        <?php echo random_featured_collection(); ?>
-    </div><!-- end featured collection -->
-    <?php endif; ?>
-
-    <?php if ((get_theme_option('Display Featured Exhibit') !== '0')
-           && plugin_is_active('ExhibitBuilder')
-           && function_exists('exhibit_builder_display_random_featured_exhibit')): ?>
-    <!-- Featured Exhibit -->
-    <?php echo exhibit_builder_display_random_featured_exhibit(); ?>
-    <?php endif; ?>
+    <form action="mud/search" method="post">
+        <input type="submit" class="big button" style="width: 100%" value="Find me a museum!" />
+        <br />
+        <div id='zip' style='float:left'>
+            <label for='zip'>Zip code</label>
+            <input type="text" name="zip" size="6" />
+        </div>
+        <div id='radius' style='float:right'>
+            <label for='geolocation-radius'>How close?</label>
+            <br />
+            <select name="geolocation-radius">
+                <option value="5">5 Miles</option>
+                <option value="20">20 Miles</option>
+                <option value="50">50 Miles</option>
+                <option value="100">100 Miles</option>
+            </select>
+        </div>
+        <div style='clear: both'>
+            <label for='type'>Museum type</label>
+            <select name="type" style="width: 100%">
+                <option value="">Any</option>
+                <option value="BOT">Arboretums, Botanitcal Gardens, And Nature Centers</option>
+            </select>
+        </div>
+        
+    </form>
 </div>
 
 <?php echo foot(); ?>
