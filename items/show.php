@@ -4,8 +4,8 @@
 
 <div id="primary">
 
-    <div class='image mud'>
-    <?php echo file_markup($item->Files, array('imageSize' => 'fullsize')); ?>
+    <div class='mud image'>
+    <?php echo file_markup($item->Files[0], array('imageSize' => 'fullsize')); ?>
     </div>
     <div class='element'>
     <?php echo metadata($item, array('Dublin Core', 'Description')); ?>
