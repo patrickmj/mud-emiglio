@@ -90,7 +90,7 @@ $range = array();
             <label for='zip'>Zip code</label>
             <input type="text" id="zip" name="zip" size="6" />
         </div>
-        <div class='locate' style='float: left; font-weight: bold;'>
+        <div class='locate' style='float: left; font-weight: bold; cursor: pointer;'>
             <p id='locate'>Locate me</p>
             <p id='located' style='display: none'>Found you!</p>
         </div>
