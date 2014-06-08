@@ -1,3 +1,8 @@
+<?php 
+queue_js_file('mobile');
+
+?>
+
 <?php echo head(array('bodyid'=>'home')); ?>
 
 <?php if ($homepageText = get_theme_option('Homepage Text')): ?>
@@ -8,7 +13,17 @@
 <?php endif; ?>
 
 <div id="primary">
-<?php echo $this->shortcodes('[carousel]')?>
+<p>There are over 35,000 museums in the United States! 
+Click on one below, <a href="<?php echo url('items/browse'); ?>">browse around</a>,
+or use the search form to find the next one you will visit.
+    
+    <div class='carousel'>
+        <?php echo $this->shortcodes('[carousel showtitles=true]')?>
+    </div>
+    
+    <div>
+        <?php echo $this->shortcodes('[geolocation]')?>
+    </div>
 </div>
 <div id="secondary">
     <form action="mud/search" method="post">
@@ -16,9 +31,13 @@
         <br />
         <div id='zip' style='float:left'>
             <label for='zip'>Zip code</label>
-            <input type="text" name="zip" size="6" />
+            <input type="text" id="zip" name="zip" size="6" />
         </div>
-        <div id='radius' style='float:right'>
+        <div class='locate' style='float: left;'>
+            <p id='locate'>Locate me</p>
+            <p id='located' style='display: none'>Found you!</p>
+        </div>
+        <div id='radius' style='float:right; font-weight: bold;'>
             <label for='geolocation-radius'>How close?</label>
             <br />
             <select name="geolocation-radius">
@@ -33,9 +52,19 @@
             <select name="type" style="width: 100%">
                 <option value="">Any</option>
                 <option value="BOT">Arboretums, Botanitcal Gardens, And Nature Centers</option>
+                <option value="ART">Art Museums</option>
+                <option value="CMU">Children's Museums</option>
+                <option value="GMU">Uncategorized of General Museums</option>
+                <option value="HSC">Historical Societies, Historic Preservation</option>
+                <option value="HST">History Museums</option>
+                <option value="NAT">Natural History and Natural Science Museums</option>
+                <option value="SCI">Science and Technology Museums and Planetariums</option>
+                <option value="ZAW">Zoos, Aquariums, and Wildlife Conservation</option>
             </select>
         </div>
-        
+        <input type='hidden' id='lat' name='geolocation-latitude' />
+        <input type='hidden' id='lng' name='geolocation-longitude' />
+        <input type='hidden' id='mobile-located' name='mobile-located' value='0' />
     </form>
 </div>
 

@@ -1,11 +1,38 @@
 <?php
-$pageTitle = __('Browse Items');
+queue_js_file('mobile');
+queue_js_url("http://maps.google.com/maps/api/js?sensor=false");
+queue_js_file('map');
+
+
+$css = "
+            #map_browse {
+                height: 436px;
+            }
+            .balloon {width:400px !important; font-size:1.2em;}
+            .balloon .title {font-weight:bold;margin-bottom:1.5em;}
+            .balloon .title, .balloon .description {float:left; width: 220px;margin-bottom:1.5em;}
+            .balloon img {float:right;display:block;}
+            .balloon .view-item {display:block; float:left; clear:left; font-weight:bold; text-decoration:none;}
+            #map-links a {
+                display:block;
+            }
+            #search_block {
+                clear: both;
+            }";
+queue_css_string($css);
+
+
+$pageTitle = __('Browse Museums');
 echo head(array('title'=>$pageTitle, 'bodyclass' => 'items browse'));
 ?>
 
+<?php 
+//set up range of ids for geolocation
+$range = array();
+?>
 <div id="primary" class="browse">
 
-    <h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', total_records('items')); ?></h1>
+    <h1><?php echo $pageTitle;?> <?php echo __('(%s total)', $total_results); ?></h1>
 
     <?php echo item_search_filters(); ?>
 
@@ -15,20 +42,8 @@ echo head(array('title'=>$pageTitle, 'bodyclass' => 'items browse'));
 
     <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
 
-    <?php if ($total_results > 0): ?>
-
-    <?php
-    $sortLinks[__('Title')] = 'Dublin Core,Title';
-    $sortLinks[__('Creator')] = 'Dublin Core,Creator';
-    $sortLinks[__('Date Added')] = 'added';
-    ?>
-    <div id="sort-links">
-        <span class="sort-label"><?php echo __('Sort by: '); ?></span><?php echo browse_sort_links($sortLinks); ?>
-    </div>
-
-    <?php endif; ?>
-
     <?php foreach (loop('items') as $item): ?>
+        <?php $range[] = $item->id; ?>
         <div class="item hentry">
             <div class="item-meta">
 
@@ -61,17 +76,66 @@ echo head(array('title'=>$pageTitle, 'bodyclass' => 'items browse'));
             </div><!-- end class="item-meta" -->
         </div><!-- end class="item hentry" -->
     <?php endforeach; ?>
+    
     <?php echo fire_plugin_hook('public_items_browse', array('items'=>$items, 'view' => $this)); ?>
 
     <div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
 </div>
 <div id="secondary">
-    <!-- Featured Item -->
-    <div id="featured-item" class="featured">
-        <h2><?php echo __('Featured Item'); ?></h2>
-        <?php echo random_featured_items(1); ?>
-    </div><!--end featured-item-->
 
+    <form action="<?php echo url('mud/search'); ?>" method="post">
+        <input type="submit" class="big button" style="width: 100%" value="Find me a museum!" />
+        <br />
+        <div id='zip' style='float:left'>
+            <label for='zip'>Zip code</label>
+            <input type="text" id="zip" name="zip" size="6" />
+        </div>
+        <div class='locate' style='float: left; font-weight: bold;'>
+            <p id='locate'>Locate me</p>
+            <p id='located' style='display: none'>Found you!</p>
+        </div>
+        <div id='radius' style='float:right'>
+            <label for='geolocation-radius'>How close?</label>
+            <br />
+            <select name="geolocation-radius">
+                <option value="5">5 Miles</option>
+                <option value="20">20 Miles</option>
+                <option value="50">50 Miles</option>
+                <option value="100">100 Miles</option>
+            </select>
+        </div>
+        <div style='clear: both'>
+            <label for='type'>Museum type</label>
+            <select name="type" style="width: 100%">
+                <option value="">Any</option>
+                <option value="BOT">Arboretums, Botanitcal Gardens, And Nature Centers</option>
+            </select>
+        </div>
+        <input type='hidden' id='lat' name='geolocation-latitude' />
+        <input type='hidden' id='lng' name='geolocation-longitude' />
+        <input type='hidden' id='mobile-located' name='mobile-located' value='0' />
+    </form>
+
+
+
+<?php 
+$range = implode(',', $range);
+$params = array(
+        'controller'     => 'map',
+        'action'         => 'browse',
+        'module'         => 'geolocation',
+        'output'         => 'kml',
+        'only_map_items' => true,
+        'range'          => $range
+        );
+
+?>
+    <?php if (! empty($range)): ?>
+    <div>
+    <?php echo $this->googleMap('map_browse', array( 'params' => $params)); ?>
+    
+    </div>    
+    <?php endif; ?>
 </div><!-- end primary -->
 
 <?php echo foot(); ?>
