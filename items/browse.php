@@ -5,7 +5,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass' => 'items browse'));
 
 <div id="primary" class="browse">
 
-    <h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', total_records('items')); ?></h1>
+    <h1><?php echo $pageTitle;?> <?php echo __('(%s total)', $total_results); ?></h1>
 
     <?php echo item_search_filters(); ?>
 
@@ -13,7 +13,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass' => 'items browse'));
         <?php echo public_nav_items(); ?>
     </ul>
 
-    <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 
     <?php if ($total_results > 0): ?>
 
@@ -56,14 +56,14 @@ echo head(array('title'=>$pageTitle, 'bodyclass' => 'items browse'));
                 </div>
             <?php endif; ?>
 
-            <?php echo fire_plugin_hook('admin_items_browse_simple_each', array('view' => $this, 'item' =>$item)); ?>
+            <?php echo fire_plugin_hook('public_items_browse_each', array('view' => $this, 'item' =>$item)); ?>
 
             </div><!-- end class="item-meta" -->
         </div><!-- end class="item hentry" -->
     <?php endforeach; ?>
     <?php echo fire_plugin_hook('public_items_browse', array('items'=>$items, 'view' => $this)); ?>
 
-    <div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 </div>
 <div id="secondary">
     <!-- Featured Item -->

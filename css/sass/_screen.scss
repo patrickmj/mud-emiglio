@@ -244,10 +244,12 @@ label,
 
 #content {
     clear:both;
+    @include padding-trailer();
     border-top:1px solid $gray;
     border-bottom:1px solid $gray;
     float: left;
     width: 100%;
+    position: relative;
     
     & > h1:first-of-type {
         padding: rhythm(.5) 0;
@@ -259,15 +261,33 @@ label,
     }
 }
 
+#content > h1:first-child {
+    width: 100%;
+    display: inline-block;
+}
+
 #content > #primary:not(:only-child) {
     float:left;
     width: 65%;
-    border-right:1px solid $gray;
-    padding: 0 rhythm() rhythm() 0;
+    padding: rhythm() rhythm() rhythm() 0;
+    @include trailer(-1);
+    position: relative;
     
-    h1:first-of-type {
-        @include leader(1, 2 * $base-font-size);
+    & > h1:first-child,
+    & > h2:first-child {
+        @include leader(0);
         @include trailer(1, 2 * $base-font-size);
+    }
+    
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        background-color: $gray;
+        width: 1px;
     }
 }
 
@@ -280,6 +300,8 @@ label,
     width: 35%;
     padding: 0 0 rhythm() rhythm();
     word-wrap: break-word;
+    border-left: 1px solid $gray;
+    @include trailer(-1);
 }
 
 .navigation {
@@ -287,8 +309,10 @@ label,
     margin-left: 0;
 }
 
-.pagination {
+.pagination-nav {
     position: relative;
+    float: left;
+    clear: both;
 
     ul {
         height: rhythm(1.5);
@@ -703,6 +727,7 @@ footer {
 
 /* @group ----- Search ----- */
 
+#item-filters ul,
 #search-filters ul {
     margin: 0;
 
@@ -711,16 +736,19 @@ footer {
     }
 }
 
+#item-filters li,
 #search-filters li {
     display: inline-block;
 }    
 
+#item-filters > ul > li,
 #search-filters > ul > li {
     padding: rhythm(.5) 10px;
-    background-color: $yellow;
-    color: #fff;
+    background-color: lighten($yellow, 35%);
+    color: darken($yellow, 15%);
 }
 
+#item-filters li li,
 #search-filters li li {
     text-transform: lowercase;
     
@@ -731,6 +759,12 @@ footer {
     &:last-of-type:after {
         content: "";
     }
+}
+
+#item-filters {
+    border-color: $gray;
+    @include trailing-border(1px, 1, $base-font-size, solid);
+    @include trailer();
 }
 
 #search-results {
@@ -804,10 +838,6 @@ footer {
     @include trailer();
 }
 
-#recent-items .item img {
-    width: rhythm(3);
-}
-
 /* @end */
 
 /* @group ----- Items ----- */
@@ -819,15 +849,6 @@ footer {
 .items.show #secondary {
     padding-top: 0;
 }
-
-.items.show h1 {
-    width: 100%;
-    display: inline-block;
-    border-color: $gray;
-    @include leader(1, 2 * $base-font-size);
-    @include trailing-border(1px, 1, 2 * $base-font-size, solid);
-}
-
 
 .items-nav,
 #secondary-nav,
@@ -900,8 +921,9 @@ div.item {
     border-color: $gray;
     font-weight:bold;
     @include leading-border(1px, 1, $base-font-size, solid);
-    @include padding-trailer();
-    @include trailer(0);
+    margin: rhythm() 0 0;
+    float: left;
+    width: 100%;
 
     li {
         display:block;
@@ -936,10 +958,6 @@ div.item {
        width: auto;
        @include trailer();
     }
-}
-
-#pagination-top {
-    float: left;
 }
 
 #sort-links {
@@ -1015,6 +1033,25 @@ div.item {
     float: left;
 }
 
+.collections .item-img {
+    float: left;
+    margin: 0 rhythm() rhythm() 0;
+    
+    a {
+        display: block;
+        height: rhythm(4);
+    }
+    
+    img {
+        height: 100%;
+        width: auto;
+        padding: 3px;
+        border: 1px solid #ccc;
+        margin: 0;
+        background-color: #fff;
+    }    
+}
+
 /* @end */
 
 /* @group ----- Simple Pages ----- */
@@ -1029,10 +1066,13 @@ div.item {
 
 /* @group ----- Exhibits ----- */
 
+.exhibit {
+    overflow: hidden;
+}
+
 .summary #content > h1:first-of-type {
     float: left;
     width: 65%;
-    border-right: 1px solid #DDD;
 }
 
 .summary #content > h1:first-of-type {
@@ -1040,13 +1080,17 @@ div.item {
 }
 
 .summary #content #primary {
-    margin-right: rhythm(1, 2 * $base-font-size);
+    margin-right: rhythm();
 }
 
-.browse .exhibit:not(:last-child) {
+.exhibits #secondary h2 {
+    @include trailer(.5, 1.5 * $base-font-size);
+}
+
+.browse .exhibit {
     border-color: $gray;
-    @include trailing-border(1px, 0, $base-font-size, solid);
-    @include trailer();
+    @include leading-border(1px, 1, $base-font-size, solid);
+    @include leader();
 }
 
 #exhibit-pages {
@@ -1058,7 +1102,6 @@ div.item {
         
         ul {
             padding-left: rhythm();
-            border-left: 1px solid $gray;
             @include trailer(0);
         }
     
@@ -1066,7 +1109,6 @@ div.item {
             width: 100%;
             display: block;
             padding: 0;
-            @include trailer();
             
             &:last-of-type {
                 @include trailer(0);
@@ -1090,19 +1132,21 @@ div.item {
         }
     }
     
-    .current a {
+    .current > a {
         background-color: darken($yellow, 15%);
     }
 }
 
 .summary #exhibit-pages {
-    padding: rhythm();    
+    padding: rhythm() 0;    
 }
 
 #exhibit-page-navigation {
     border-color: $gray;
     @include leading-border(1px, 1, $base-font-size, solid);
-    margin: rhythm() 0;
+    margin: rhythm() 0 0;
+    float: left;
+    width: 100%;
 }
 
 /* @end */
