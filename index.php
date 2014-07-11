@@ -13,7 +13,7 @@ queue_js_file('mobile');
 <?php endif; ?>
 
 <div id="primary">
-<p>There are over 35,000 museums in the United States! 
+<p>There are over 35,000 museums and historical societies in the United States! 
 Click on one below, <a href="<?php echo url('items/browse'); ?>">browse around</a>,
 or use the search form to find the next one you will visit.
     
