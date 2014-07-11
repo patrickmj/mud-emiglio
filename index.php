@@ -22,7 +22,7 @@ or use the search form to find the next one you will visit.
     </div>
     
     <div>
-        <?php echo $this->shortcodes('[geolocation]')?>
+        <?php echo $this->shortcodes('[geolocation order=random]')?>
     </div>
 </div>
 <div id="secondary">
