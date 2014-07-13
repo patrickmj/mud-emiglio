@@ -40,7 +40,7 @@ $range = array();
         <?php echo public_nav_items(); ?>
     </ul>
 
-    <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 
     <?php foreach (loop('items') as $item): ?>
         <?php $range[] = $item->id; ?>
@@ -71,7 +71,7 @@ $range = array();
                 </div>
             <?php endif; ?>
 
-            <?php echo fire_plugin_hook('admin_items_browse_simple_each', array('view' => $this, 'item' =>$item)); ?>
+            <?php echo fire_plugin_hook('public_items_browse_each', array('view' => $this, 'item' =>$item)); ?>
 
             </div><!-- end class="item-meta" -->
         </div><!-- end class="item hentry" -->
@@ -79,7 +79,7 @@ $range = array();
     
     <?php echo fire_plugin_hook('public_items_browse', array('items'=>$items, 'view' => $this)); ?>
 
-    <div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 </div>
 <div id="secondary">
 
@@ -90,7 +90,7 @@ $range = array();
             <label for='zip'>Zip code</label>
             <input type="text" id="zip" name="zip" size="6" />
         </div>
-        <div class='locate' style='float: left; font-weight: bold;'>
+        <div class='locate' style='float: left; font-weight: bold; cursor: pointer;'>
             <p id='locate'>Locate me</p>
             <p id='located' style='display: none'>Found you!</p>
         </div>

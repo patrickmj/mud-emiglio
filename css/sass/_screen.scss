@@ -67,6 +67,14 @@ ul, ol, dl {
     margin-left: 1.5em;
 }
 
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
 
 ul ul,
 ul ol,
@@ -181,8 +189,14 @@ a.button {
 
 select {
     display: inline-block;
-    vertical-align: top;
-    margin: rhythm(.5) 5px rhythm(.5) 0;
+    margin: rhythm(.25) 0;
+    @include border-radius(0px);
+    border: 1px solid #ccc;
+    font-size: $base-font-size;
+    line-height: 1.5 * $base-line-height;
+    height: 1.5 * $base-line-height;
+    margin-right: 3px;
+    vertical-align: top;    
 }
     
 
@@ -230,10 +244,12 @@ label,
 
 #content {
     clear:both;
+    @include padding-trailer();
     border-top:1px solid $gray;
     border-bottom:1px solid $gray;
     float: left;
     width: 100%;
+    position: relative;
     
     & > h1:first-of-type {
         padding: rhythm(.5) 0;
@@ -245,15 +261,33 @@ label,
     }
 }
 
+#content > h1:first-child {
+    width: 100%;
+    display: inline-block;
+}
+
 #content > #primary:not(:only-child) {
     float:left;
     width: 65%;
-    border-right:1px solid $gray;
-    padding: 0 rhythm() rhythm() 0;
+    padding: rhythm() rhythm() rhythm() 0;
+    @include trailer(-1);
+    position: relative;
     
-    h1:first-of-type {
-        @include leader(1, 2 * $base-font-size);
+    & > h1:first-child,
+    & > h2:first-child {
+        @include leader(0);
         @include trailer(1, 2 * $base-font-size);
+    }
+    
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        background-color: $gray;
+        width: 1px;
     }
 }
 
@@ -266,6 +300,8 @@ label,
     width: 35%;
     padding: 0 0 rhythm() rhythm();
     word-wrap: break-word;
+    border-left: 1px solid $gray;
+    @include trailer(-1);
 }
 
 .navigation {
@@ -273,8 +309,10 @@ label,
     margin-left: 0;
 }
 
-.pagination {
+.pagination-nav {
     position: relative;
+    float: left;
+    clear: both;
 
     ul {
         height: rhythm(1.5);
@@ -689,6 +727,7 @@ footer {
 
 /* @group ----- Search ----- */
 
+#item-filters ul,
 #search-filters ul {
     margin: 0;
 
@@ -697,16 +736,19 @@ footer {
     }
 }
 
+#item-filters li,
 #search-filters li {
     display: inline-block;
 }    
 
+#item-filters > ul > li,
 #search-filters > ul > li {
     padding: rhythm(.5) 10px;
-    background-color: $yellow;
-    color: #fff;
+    background-color: lighten($yellow, 35%);
+    color: darken($yellow, 15%);
 }
 
+#item-filters li li,
 #search-filters li li {
     text-transform: lowercase;
     
@@ -717,6 +759,12 @@ footer {
     &:last-of-type:after {
         content: "";
     }
+}
+
+#item-filters {
+    border-color: $gray;
+    @include trailing-border(1px, 1, $base-font-size, solid);
+    @include trailer();
 }
 
 #search-results {
@@ -790,10 +838,6 @@ footer {
     @include trailer();
 }
 
-#recent-items .item img {
-    width: rhythm(3);
-}
-
 /* @end */
 
 /* @group ----- Items ----- */
@@ -805,15 +849,6 @@ footer {
 .items.show #secondary {
     padding-top: 0;
 }
-
-.items.show h1 {
-    width: 100%;
-    display: inline-block;
-    border-color: $gray;
-    @include leader(1, 2 * $base-font-size);
-    @include trailing-border(1px, 1, 2 * $base-font-size, solid);
-}
-
 
 .items-nav,
 #secondary-nav,
@@ -886,8 +921,9 @@ div.item {
     border-color: $gray;
     font-weight:bold;
     @include leading-border(1px, 1, $base-font-size, solid);
-    @include padding-trailer();
-    @include trailer(0);
+    margin: rhythm() 0 0;
+    float: left;
+    width: 100%;
 
     li {
         display:block;
@@ -922,10 +958,6 @@ div.item {
        width: auto;
        @include trailer();
     }
-}
-
-#pagination-top {
-    float: left;
 }
 
 #sort-links {
@@ -963,25 +995,61 @@ div.item {
 
 #advanced-search-form {
     @include padding-trailer(2);
-}
 
-#advanced-search-form label {
-    font-size: 1.125 * $base-font-size;
-}
+    label {
+        font-size: 1.125 * $base-font-size;
+    }
 
-#advanced-search-form input {
-    display: inline;
+    input {
+        display: inline-block;
+    }
 }
 
 .remove_search {
     padding: rhythm(.25) 10px;
+    text-indent: -9999px;
+    width: 1.5 * $base-line-height;
+    position: relative;
+    height: 1.5 * $base-line-height;
+    
+    &:after {
+        content: "\f00d";
+        font-family: "FontAwesome";
+        text-indent: 0;
+        text-align: center;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        line-height: 1.5 * $base-line-height;
+    }
 }
+
 /* @end */
 
 /* @group ----- Collections ----- */
 
 .collections.browse h1 {
     float: left;
+}
+
+.collections .item-img {
+    float: left;
+    margin: 0 rhythm() rhythm() 0;
+    
+    a {
+        display: block;
+        height: rhythm(4);
+    }
+    
+    img {
+        height: 100%;
+        width: auto;
+        padding: 3px;
+        border: 1px solid #ccc;
+        margin: 0;
+        background-color: #fff;
+    }    
 }
 
 /* @end */
@@ -998,10 +1066,13 @@ div.item {
 
 /* @group ----- Exhibits ----- */
 
+.exhibit {
+    overflow: hidden;
+}
+
 .summary #content > h1:first-of-type {
     float: left;
     width: 65%;
-    border-right: 1px solid #DDD;
 }
 
 .summary #content > h1:first-of-type {
@@ -1009,7 +1080,17 @@ div.item {
 }
 
 .summary #content #primary {
-    margin-right: rhythm(1, 2 * $base-font-size);
+    margin-right: rhythm();
+}
+
+.exhibits #secondary h2 {
+    @include trailer(.5, 1.5 * $base-font-size);
+}
+
+.browse .exhibit {
+    border-color: $gray;
+    @include leading-border(1px, 1, $base-font-size, solid);
+    @include leader();
 }
 
 #exhibit-pages {
@@ -1021,7 +1102,6 @@ div.item {
         
         ul {
             padding-left: rhythm();
-            border-left: 1px solid $gray;
             @include trailer(0);
         }
     
@@ -1029,7 +1109,6 @@ div.item {
             width: 100%;
             display: block;
             padding: 0;
-            @include trailer();
             
             &:last-of-type {
                 @include trailer(0);
@@ -1053,19 +1132,21 @@ div.item {
         }
     }
     
-    .current a {
+    .current > a {
         background-color: darken($yellow, 15%);
     }
 }
 
 .summary #exhibit-pages {
-    padding: rhythm();    
+    padding: rhythm() 0;    
 }
 
 #exhibit-page-navigation {
     border-color: $gray;
     @include leading-border(1px, 1, $base-font-size, solid);
-    margin: rhythm() 0;
+    margin: rhythm() 0 0;
+    float: left;
+    width: 100%;
 }
 
 /* @end */

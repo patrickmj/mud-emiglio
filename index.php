@@ -13,27 +13,27 @@ queue_js_file('mobile');
 <?php endif; ?>
 
 <div id="primary">
-<p>There are over 35,000 museums in the United States! 
+<p>There are over 35,000 museums and historical societies in the United States! 
 Click on one below, <a href="<?php echo url('items/browse'); ?>">browse around</a>,
 or use the search form to find the next one you will visit.
     
     <div class='carousel'>
-        <?php echo $this->shortcodes('[carousel showtitles=true]')?>
+        <?php echo $this->shortcodes('[carousel showtitles=true order=random num=20]')?>
     </div>
     
     <div>
-        <?php echo $this->shortcodes('[geolocation]')?>
+        <?php echo $this->shortcodes('[geolocation order=random]')?>
     </div>
 </div>
 <div id="secondary">
     <form action="mud/search" method="post">
-        <input type="submit" class="big button" style="width: 100%" value="Find me a museum!" />
+        <input type="submit" class="big button" style="width: 100%; font-size: 24px;" value="Find me a museum!" />
         <br />
         <div id='zip' style='float:left'>
             <label for='zip'>Zip code</label>
             <input type="text" id="zip" name="zip" size="6" />
         </div>
-        <div class='locate' style='float: left;'>
+        <div class='locate' style='float: left; font-weight: bold; cursor: pointer;'>
             <p id='locate'>Locate me</p>
             <p id='located' style='display: none'>Found you!</p>
         </div>

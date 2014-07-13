@@ -7,9 +7,11 @@ $title = metadata($item, array('Dublin Core', 'Title'));
 
 <div id="primary">
 
-    <?php if (! empty($item->Files)): ?>
+    <?php
+        $files = $item->Files; 
+        if (! empty($files)): ?>
     <div class='mud image'>
-    <?php echo file_markup($item->Files[0], array('imageSize' => 'fullsize')); ?>
+    <?php echo file_markup($files[0], array('imageSize' => 'fullsize')); ?>
     </div>
     <?php endif; ?>
     <div class='element'>

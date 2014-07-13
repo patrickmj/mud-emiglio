@@ -50,7 +50,7 @@ a img {
   border: none;
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
@@ -69,18 +69,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -- Exhibits
   */
   /* @group ----- Generic HTML elements ----- */
-  * html {
-    font-size: 87.5%;
-  }
-
   html {
-    font-size: 14px;
+    font-size: 87.5%;
     line-height: 1.5em;
   }
 
   * {
-    -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
 
@@ -127,6 +123,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     margin-left: 1.5em;
   }
 
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
   ul ul,
   ul ol,
   ol ol,
@@ -148,8 +152,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     font-style: italic;
     border-color: #dddddd;
     padding: 1.5em 1.5em 0;
-    border-top-style: solid;
     border-top-width: 0.07143em;
+    border-top-style: solid;
     padding-top: 1.42857em;
   }
 
@@ -214,8 +218,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   textarea {
     font-family: "Lato", sans-serif;
     border-color: #dddddd;
-    border-style: solid;
     border-width: 0.07143em;
+    border-style: solid;
     padding: 0.30357em;
     font-size: 14px;
     line-height: 21px;
@@ -228,13 +232,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   input[type=submit],
   button,
   a.button {
-    -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
-    -webkit-border-radius: 0;
+    -webkit-appearance: none;
     -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
+    -webkit-border-radius: 0;
     border-radius: 0;
     font-family: "Lato", sans-serif;
     font-size: 14px;
@@ -254,8 +255,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   select {
     display: inline-block;
+    margin: 0.375em 0;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 31.5px;
+    height: 31.5px;
+    margin-right: 3px;
     vertical-align: top;
-    margin: 0.75em 5px 0.75em 0;
   }
 
   textarea {
@@ -263,8 +272,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     min-width: 50%;
     min-height: 9em;
     border-color: #dddddd;
-    border-style: solid;
     border-width: 0.07143em;
+    border-style: solid;
     padding: 0.67857em;
     vertical-align: top;
   }
@@ -301,10 +310,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   #content {
     clear: both;
+    padding-bottom: 1.5em;
     border-top: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
     float: left;
     width: 100%;
+    position: relative;
   }
   #content > h1:first-of-type {
     padding: 0.75em 0;
@@ -314,15 +325,31 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     padding-top: 1.5em;
   }
 
+  #content > h1:first-child {
+    width: 100%;
+    display: inline-block;
+  }
+
   #content > #primary:not(:only-child) {
     float: left;
     width: 65%;
-    border-right: 1px solid #dddddd;
-    padding: 0 1.5em 1.5em 0;
+    padding: 1.5em 1.5em 1.5em 0;
+    margin-bottom: -1.5em;
+    position: relative;
   }
-  #content > #primary:not(:only-child) h1:first-of-type {
-    margin-top: 0.75em;
+  #content > #primary:not(:only-child) > h1:first-child, #content > #primary:not(:only-child) > h2:first-child {
+    margin-top: 0em;
     margin-bottom: 0.75em;
+  }
+  #content > #primary:not(:only-child):after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: -1px;
+    top: 0;
+    bottom: 0;
+    background-color: #dddddd;
+    width: 1px;
   }
 
   #content nav {
@@ -334,6 +361,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     width: 35%;
     padding: 0 0 1.5em 1.5em;
     word-wrap: break-word;
+    border-left: 1px solid #dddddd;
+    margin-bottom: -1.5em;
   }
 
   .navigation {
@@ -341,10 +370,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     margin-left: 0;
   }
 
-  .pagination {
+  .pagination-nav {
     position: relative;
+    float: left;
+    clear: both;
   }
-  .pagination ul {
+  .pagination-nav ul {
     height: 2.25em;
     clear: both;
     margin: 0 0 1.5em;
@@ -352,7 +383,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     display: inline-block;
     vertical-align: top;
   }
-  .pagination input {
+  .pagination-nav input {
     margin: 0 5px 0 0;
     width: 4em;
     text-align: center;
@@ -452,8 +483,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   .collection {
     border-color: #dddddd;
-    border-top-style: solid;
     border-top-width: 0.07143em;
+    border-top-style: solid;
     padding-top: 0.67857em;
     clear: both;
   }
@@ -475,8 +506,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   .collection .image,
   .exhibit .image {
-    -webkit-box-shadow: -3px -3px 0 rgba(0, 0, 0, 0.2), -6px -6px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: -3px -3px 0 rgba(0, 0, 0, 0.2), -6px -6px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: -3px -3px 0 rgba(0, 0, 0, 0.2), -6px -6px 0 rgba(0, 0, 0, 0.1);
     box-shadow: -3px -3px 0 rgba(0, 0, 0, 0.2), -6px -6px 0 rgba(0, 0, 0, 0.1);
     margin-left: 6px;
   }
@@ -568,8 +599,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     width: 100%;
     border-color: #dddddd;
     border-top-color: #fff;
-    border-style: solid;
     border-width: 0.07143em;
+    border-style: solid;
     padding: 0.30357em;
     text-align: left;
     padding: 0.75em;
@@ -698,8 +729,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     clear: both;
     margin: 1.5em 0;
     border-color: #dddddd;
-    border-top-style: solid;
     border-top-width: 0.07143em;
+    border-top-style: solid;
     padding-top: 1.42857em;
   }
   #header-image img {
@@ -748,31 +779,46 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   /* @end */
   /* @group ----- Search ----- */
+  #item-filters ul,
   #search-filters ul {
     margin: 0;
   }
+  #item-filters ul ul,
   #search-filters ul ul {
     display: inline-block;
   }
 
+  #item-filters li,
   #search-filters li {
     display: inline-block;
   }
 
+  #item-filters > ul > li,
   #search-filters > ul > li {
     padding: 0.75em 10px;
-    background-color: #a49d4c;
-    color: #fff;
+    background-color: #e2dfc0;
+    color: #706b34;
   }
 
+  #item-filters li li,
   #search-filters li li {
     text-transform: lowercase;
   }
+  #item-filters li li:after,
   #search-filters li li:after {
     content: ", ";
   }
+  #item-filters li li:last-of-type:after,
   #search-filters li li:last-of-type:after {
     content: "";
+  }
+
+  #item-filters {
+    border-color: #dddddd;
+    border-bottom-width: 0.07143em;
+    border-bottom-style: solid;
+    padding-bottom: 1.42857em;
+    margin-bottom: 1.5em;
   }
 
   #search-results {
@@ -790,8 +836,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   #intro {
     border-color: #dddddd;
     padding-top: 1.5em;
-    border-bottom-style: solid;
     border-bottom-width: 0.07143em;
+    border-bottom-style: solid;
     padding-bottom: 1.42857em;
   }
 
@@ -802,8 +848,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     color: #fff;
     padding: 1.5em 1.5em 0;
     border-color: #4F584D;
-    border-bottom-style: solid;
     border-bottom-width: 0.21429em;
+    border-bottom-style: solid;
     padding-bottom: 1.28571em;
     margin-bottom: 1.5em;
   }
@@ -838,8 +884,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   #featured-item .item,
   #featured-collection .collection,
   #featured-exhibit .exhibit {
-    border-top-style: solid;
     border-top-width: 0em;
+    border-top-style: solid;
     padding-top: 0em;
   }
 
@@ -851,10 +897,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     margin-bottom: 1.5em;
   }
 
-  #recent-items .item img {
-    width: 4.5em;
-  }
-
   /* @end */
   /* @group ----- Items ----- */
   .items.show #content > #primary {
@@ -863,16 +905,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   .items.show #secondary {
     padding-top: 0;
-  }
-
-  .items.show h1 {
-    width: 100%;
-    display: inline-block;
-    border-color: #dddddd;
-    margin-top: 0.75em;
-    border-bottom-style: solid;
-    border-bottom-width: 0.03571em;
-    padding-bottom: 0.71429em;
   }
 
   .items-nav,
@@ -916,8 +948,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     clear: both;
     overflow: hidden;
     border-color: #dddddd;
-    border-top-style: solid;
     border-top-width: 0.07143em;
+    border-top-style: solid;
     padding-top: 1.42857em;
   }
 
@@ -953,11 +985,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     overflow: hidden;
     border-color: #dddddd;
     font-weight: bold;
-    border-top-style: solid;
     border-top-width: 0.07143em;
+    border-top-style: solid;
     padding-top: 1.42857em;
-    padding-bottom: 1.5em;
-    margin-bottom: 0em;
+    margin: 1.5em 0 0;
+    float: left;
+    width: 100%;
   }
   .item-pagination li {
     display: block;
@@ -987,10 +1020,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     height: 6em;
     width: auto;
     margin-bottom: 1.5em;
-  }
-
-  #pagination-top {
-    float: left;
   }
 
   #sort-links {
@@ -1028,23 +1057,53 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   #advanced-search-form {
     padding-bottom: 3em;
   }
-
   #advanced-search-form label {
     font-size: 15.75px;
   }
-
   #advanced-search-form input {
-    display: inline;
+    display: inline-block;
   }
 
   .remove_search {
     padding: 0.375em 10px;
+    text-indent: -9999px;
+    width: 31.5px;
+    position: relative;
+    height: 31.5px;
+  }
+  .remove_search:after {
+    content: "\f00d";
+    font-family: "FontAwesome";
+    text-indent: 0;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    line-height: 31.5px;
   }
 
   /* @end */
   /* @group ----- Collections ----- */
   .collections.browse h1 {
     float: left;
+  }
+
+  .collections .item-img {
+    float: left;
+    margin: 0 1.5em 1.5em 0;
+  }
+  .collections .item-img a {
+    display: block;
+    height: 6em;
+  }
+  .collections .item-img img {
+    height: 100%;
+    width: auto;
+    padding: 3px;
+    border: 1px solid #ccc;
+    margin: 0;
+    background-color: #fff;
   }
 
   /* @end */
@@ -1057,10 +1116,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   /* @end */
   /* @group ----- Exhibits ----- */
+  .exhibit {
+    overflow: hidden;
+  }
+
   .summary #content > h1:first-of-type {
     float: left;
     width: 65%;
-    border-right: 1px solid #DDD;
   }
 
   .summary #content > h1:first-of-type {
@@ -1068,7 +1130,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   }
 
   .summary #content #primary {
-    margin-right: 0.75em;
+    margin-right: 1.5em;
+  }
+
+  .exhibits #secondary h2 {
+    margin-bottom: 0.5em;
+  }
+
+  .browse .exhibit {
+    border-color: #dddddd;
+    border-top-width: 0.07143em;
+    border-top-style: solid;
+    padding-top: 1.42857em;
+    margin-top: 1.5em;
   }
 
   #exhibit-pages ul {
@@ -1079,14 +1153,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   }
   #exhibit-pages ul ul {
     padding-left: 1.5em;
-    border-left: 1px solid #dddddd;
     margin-bottom: 0em;
   }
   #exhibit-pages ul li {
     width: 100%;
     display: block;
     padding: 0;
-    margin-bottom: 1.5em;
   }
   #exhibit-pages ul li:last-of-type {
     margin-bottom: 0em;
@@ -1105,20 +1177,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     background-color: #5e5a2c;
     color: #fff;
   }
-  #exhibit-pages .current a {
+  #exhibit-pages .current > a {
     background-color: #706b34;
   }
 
   .summary #exhibit-pages {
-    padding: 1.5em;
+    padding: 1.5em 0;
   }
 
   #exhibit-page-navigation {
     border-color: #dddddd;
-    border-top-style: solid;
     border-top-width: 0.07143em;
+    border-top-style: solid;
     padding-top: 1.42857em;
-    margin: 1.5em 0;
+    margin: 1.5em 0 0;
+    float: left;
+    width: 100%;
   }
 
   /* @end */
@@ -1149,8 +1223,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     display: block;
     width: 100%;
     border-color: rgba(255, 255, 255, 0.15);
-    border-bottom-style: solid;
     border-bottom-width: 0.07143em;
+    border-bottom-style: solid;
     padding-bottom: -0.07143em;
   }
   .navigation li a {
@@ -1163,6 +1237,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   .sub-nav.open {
     width: 100%;
     min-width: intrinsic;
+  }
+
+  .search-entry {
+    margin-bottom: 1.5em;
+  }
+
+  .search-entry select,
+  .search-entry input[type=text] {
+    display: block;
+    width: 100%;
   }
 }
 @media print {
