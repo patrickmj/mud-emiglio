@@ -1,4 +1,11 @@
 <?php 
+$paths = $this->getAssetPaths();
+//print_r($paths, true);
+$themePath = $paths[0][0];
+$this->addHelperPath($themePath . '/helpers', 'Emiglio_View_Helper_');
+
+?>
+<?php 
 $title = metadata($item, array('Dublin Core', 'Title'));
 ?>
 <?php echo head(array('title' => $title, 'bodyclass' => 'items show')); ?>

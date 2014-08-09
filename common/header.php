@@ -1,3 +1,10 @@
+<?php 
+$paths = $this->getAssetPaths();
+print_r($paths, true);
+$themePath = $paths[0][0];
+$this->addHelperPath($themePath . '/helpers', 'Emiglio_View_Helper_');
+
+?>
 <!DOCTYPE html>
 <html lang="<?php echo get_html_lang(); ?>">
 <head>

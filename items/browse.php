@@ -1,4 +1,11 @@
+<?php 
+$paths = $this->getAssetPaths();
+$themePath = $paths[0][0];
+$this->addHelperPath($themePath . '/helpers', 'Emiglio_View_Helper_');
+?>
+
 <?php
+
 queue_js_file('mobile');
 queue_js_url("http://maps.google.com/maps/api/js?sensor=false");
 queue_js_file('map');
