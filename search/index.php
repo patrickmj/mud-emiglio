@@ -1,4 +1,5 @@
 <?php
+
 queue_js_file('mobile');
 queue_js_url("http://maps.google.com/maps/api/js?sensor=false");
 queue_js_file('map');
@@ -73,6 +74,8 @@ $params = array(
 
 ?>
     <?php if (! empty($range)): ?>
+    <div>
+
     <form action="mud/search" method="post">
         <input type="submit" class="big button" style="width: 100%; font-size: 24px;" value="Find me a museum!" />
         <br />
