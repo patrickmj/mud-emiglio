@@ -18,12 +18,9 @@ Click on one below, <a href="<?php echo url('items/browse'); ?>">browse around</
 or use the search form to find the next one you will visit.
     
     <div class='carousel'>
-        <?php echo $this->shortcodes('[carousel showtitles=true order=random num=20]')?>
+        <?php echo $this->shortcodes('[carousel showtitles=true sort=random num=20]')?>
     </div>
-    
-    <div>
-        <?php echo $this->shortcodes('[geolocation order=random]')?>
-    </div>
+
 </div>
 <div id="secondary">
     <form action="mud/search" method="post">
