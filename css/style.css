@@ -1306,3 +1306,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     font-style: italic;
   }
 }
+
+input.find-museum {
+    width: 100%;
+    font-size: 24px;
+}

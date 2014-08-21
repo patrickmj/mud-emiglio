@@ -91,7 +91,7 @@ $range = array();
 <div id="secondary">
 
     <form action="<?php echo url('mud/search'); ?>" method="post">
-        <input type="submit" class="big button" style="width: 100%" value="Find me a museum!" />
+        <input type="submit" class="big button find-museum" value="Find me a museum!" />
         <br />
         <div id='zip' style='float:left'>
             <label for='zip'>Zip code</label>
