@@ -24,7 +24,7 @@ or use the search form to find the next one you will visit.
 </div>
 <div id="secondary">
     <form action="mud/search" method="post">
-        <input type="submit" class="big button" value="Find me a museum!" />
+        <input type="submit" class="big button find-museum" value="Find me a museum!" />
         <br />
         <div id='zip' style='float:left'>
             <label for='zip'>Zip code</label>
