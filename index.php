@@ -48,10 +48,10 @@ or use the search form to find the next one you will visit.
             <label for='type'>Museum type</label>
             <select name="type" style="width: 100%">
                 <option value="">Any</option>
+                <option value="GMU">Uncategorized or General Museums</option>
                 <option value="BOT">Arboretums, Botanitcal Gardens, And Nature Centers</option>
                 <option value="ART">Art Museums</option>
                 <option value="CMU">Children's Museums</option>
-                <option value="GMU">Uncategorized of General Museums</option>
                 <option value="HSC">Historical Societies, Historic Preservation</option>
                 <option value="HST">History Museums</option>
                 <option value="NAT">Natural History and Natural Science Museums</option>
