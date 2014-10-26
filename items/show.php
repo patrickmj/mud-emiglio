@@ -46,9 +46,14 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     <?php endif;?>
     </div>
     <div>
+
     <p>
-    If any information presented is inaccurate or missing, please <a href="<?php echo url('contact'); ?>">let us know</a>!
+    If something is wrong or missing on this page of the internet, please add a correction <?php echo CorrectionsPlugin::correctionLink($item, 'here');?>. 
     </p>
+    
+    <p>
+    You can also <a href="<?php echo url('contact'); ?>">let me know</a> about thoughts and ideas about this site.
+    </p>    
     </div>
     <?php echo get_specific_plugin_hook_output('Geolocation', 'public_items_show', array('view' => $this, 'item' => $item) ); ?>
 
@@ -64,6 +69,11 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     <a href="<?php echo $link  ?>"><?php echo metadata($item, array('Dublin Core', 'Title'));?></a>
     <?php endif; ?>
     </div>
+    <div>
+    <?php $socialMedia = new SocialMediaElementSetPlugin; 
+    echo $socialMedia->socialMediaLinksList($item);
+    ?>
+    </div>
     <div class="address">
         <?php echo metadata($item, array('MUD Elements', 'ADDRESS')); ?>
         <br />
@@ -73,6 +83,9 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     </div>
     <div class="phone">
         <?php echo metadata($item, array('MUD Elements', 'PHONE')); ?>
+    </div>
+    <div>
+    <p>Something wrong or missing? Please submit a <?php echo CorrectionsPlugin::correctionLink($item, 'correction');?>
     </div>
     <?php echo get_specific_plugin_hook_output('FacetByMetadata', 'public_items_show', array('view' => $this, 'item' => $item) ); ?>
     
