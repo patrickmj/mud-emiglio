@@ -10,6 +10,7 @@ $title = metadata($item, array('Dublin Core', 'Title'));
 ?>
 <?php echo head(array('title' => $title, 'bodyclass' => 'items show')); ?>
 
+<?php echo flash(); ?>
 <h1><?php echo $title; ?></h1>
 
 <div id="primary">
