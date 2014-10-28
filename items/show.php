@@ -32,7 +32,10 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     <p><a class='big button' href='http://en.wikipedia.org/wiki/Wikipedia:Starting_an_article'>Create a wikipedia page for <?php echo $title; ?></a>
     </p>
     <p>
-    It looks like there is no Wikipedia entry for <?php echo $title; ?>. If there really is one, please <a href="<?php echo url('contact'); ?>">let us know</a>! If not, please foster greater exchange of our shared cultural heritage by creating a Wikipedia page for it.
+    It looks like there is no Wikipedia entry for <?php echo $title; ?>. If there really is one, please 
+    <?php echo CorrectionsPlugin::correctionsLink($item, __('let us know.'));  ?>
+    If not, please foster greater exchange of our shared cultural heritage by 
+    creating a Wikipedia page for it.
     </p>
     <?php else:?>
     <a href="<?php echo $wikipediaUrl; ?>">Wikipedia Page for <?php echo $title; ?></a>
