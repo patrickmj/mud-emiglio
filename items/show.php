@@ -33,7 +33,7 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     </p>
     <p>
     It looks like there is no Wikipedia entry for <?php echo $title; ?>. If there really is one, please 
-    <?php echo CorrectionsPlugin::correctionsLink($item, __('let us know.'));  ?>
+    <?php echo CorrectionsPlugin::correctionLink($item, __('let us know.'));  ?>
     If not, please foster greater exchange of our shared cultural heritage by 
     creating a Wikipedia page for it.
     </p>
