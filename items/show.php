@@ -1,6 +1,5 @@
 <?php 
 $paths = $this->getAssetPaths();
-//print_r($paths, true);
 $themePath = $paths[0][0];
 $this->addHelperPath($themePath . '/helpers', 'Emiglio_View_Helper_');
 
@@ -87,6 +86,20 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     </div>
     <div class="phone">
         <?php echo metadata($item, array('MUD Elements', 'PHONE')); ?>
+    </div>
+    <div>
+        <?php echo metadata($item, array('Social Media Elements', 'Twitter')); ?>
+    
+    </div>
+    <div>
+        <?php echo metadata($item, array('Social Media Elements', 'GitHub')); ?>
+    </div>
+    
+    <div>
+        <?php echo metadata($item, array('Social Media Elements', 'Tumblr')); ?>
+    </div>
+    <div>
+        <?php echo metadata($item, array('Social Media Elements', 'YouTube')); ?>
     </div>
     <div>
     <p>Something wrong or missing? Please submit a <?php echo CorrectionsPlugin::correctionLink($item, 'correction');?>
