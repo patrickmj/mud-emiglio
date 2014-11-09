@@ -51,7 +51,7 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     <div>
 
     <p>
-    If something is wrong or missing on this page of the internet, please add a correction <?php echo CorrectionsPlugin::correctionLink($item, 'here');?>. 
+    If something is <a href='http://xkcd.com/386/'>wrong</a> or missing on this page of the internet, please add a correction <?php echo CorrectionsPlugin::correctionLink($item, 'here');?>. 
     </p>
     
     <p>
@@ -92,7 +92,7 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     ?>
     </div>
     <div>
-    <p>Something wrong or missing? Please submit a <?php echo CorrectionsPlugin::correctionLink($item, 'correction');?>
+    <p>Something <a href='http://xkcd.com/386/'>wrong</a> or missing? Please submit a <?php echo CorrectionsPlugin::correctionLink($item, 'correction');?>
     </div>
     <div>
     <?php echo get_specific_plugin_hook_output('FacetByMetadata', 'public_items_show', array('view' => $this, 'item' => $item) ); ?>
