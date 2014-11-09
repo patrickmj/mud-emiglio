@@ -95,7 +95,6 @@ $title = metadata($item, array('Dublin Core', 'Title'));
     <p>Something wrong or missing? Please submit a <?php echo CorrectionsPlugin::correctionLink($item, 'correction');?>
     </div>
     <div>
-    <p>Find similiar institutions based on data (where available)</p>
     <?php echo get_specific_plugin_hook_output('FacetByMetadata', 'public_items_show', array('view' => $this, 'item' => $item) ); ?>
     </div>
     
