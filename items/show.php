@@ -65,18 +65,16 @@ $title = metadata($item, array('Dublin Core', 'Title'));
 <div id="secondary">
 
     <div class="mud title">
-    <?php $link = metadata($item, array('MUD Elements', 'WEBURL')); ?>
-    <?php if (empty($link)): ?>
-    <?php echo metadata($item, array('Dublin Core', 'Title'));?>
-    <?php else: ?>
-    <a href="<?php echo $link  ?>"><?php echo metadata($item, array('Dublin Core', 'Title'));?></a>
-    <?php endif; ?>
+    <h2>
+        <?php $link = metadata($item, array('MUD Elements', 'WEBURL')); ?>
+        <?php if (empty($link)): ?>
+        <?php echo metadata($item, array('Dublin Core', 'Title'));?>
+        <?php else: ?>
+        <a href="<?php echo $link  ?>"><?php echo metadata($item, array('Dublin Core', 'Title'));?></a>
+        <?php endif; ?>
+    </h2>
     </div>
-    <div>
-    <?php $socialMedia = new SocialMediaElementSetPlugin; 
-    echo $socialMedia->socialMediaLinksList($item);
-    ?>
-    </div>
+    <p>Contact info</p>
     <div class="address">
         <?php echo metadata($item, array('MUD Elements', 'ADDRESS')); ?>
         <br />
@@ -88,24 +86,18 @@ $title = metadata($item, array('Dublin Core', 'Title'));
         <?php echo metadata($item, array('MUD Elements', 'PHONE')); ?>
     </div>
     <div>
-        <?php echo metadata($item, array('Social Media Elements', 'Twitter')); ?>
-    
-    </div>
-    <div>
-        <?php echo metadata($item, array('Social Media Elements', 'GitHub')); ?>
-    </div>
-    
-    <div>
-        <?php echo metadata($item, array('Social Media Elements', 'Tumblr')); ?>
-    </div>
-    <div>
-        <?php echo metadata($item, array('Social Media Elements', 'YouTube')); ?>
+    <p>Social Media sites for this institution</p>
+    <?php $socialMedia = new SocialMediaElementSetPlugin; 
+    echo $socialMedia->socialMediaLinksList($item, true);
+    ?>
     </div>
     <div>
     <p>Something wrong or missing? Please submit a <?php echo CorrectionsPlugin::correctionLink($item, 'correction');?>
     </div>
+    <div>
+    <p>Find similiar institutions based on data (where available)</p>
     <?php echo get_specific_plugin_hook_output('FacetByMetadata', 'public_items_show', array('view' => $this, 'item' => $item) ); ?>
-    
+    </div>
     
 </div><!-- end secondary -->
 
