@@ -519,6 +519,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     line-height: 42px;
     padding: 0 0 0.75em 0;
   }
+  #site-title img {
+    max-width: 100%;
+  }
 
   #search-container {
     float: right;
@@ -925,9 +928,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     border-width: 0 1px 1px 0;
   }
   .items-nav a:hover,
+  .items-nav li.active a,
   #secondary-nav a:hover,
+  #secondary-nav li.active a,
   .secondary-nav a:hover,
-  #exhibit-child-pages a:hover {
+  .secondary-nav li.active a,
+  #exhibit-child-pages a:hover,
+  #exhibit-child-pages li.active a {
     background-color: #5e5a2c;
     color: #fff;
   }
@@ -1115,6 +1122,44 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     overflow: hidden;
   }
 
+  .browse .exhibit {
+    clear: both;
+  }
+
+  .browse #featured-exhibit .exhibit {
+    padding: 0;
+    border-top: 0;
+  }
+
+  .summary #exhibit-pages {
+    width: -moz-calc(35% - 1.5em);
+    width: -webkit-calc(35% - 1.5em);
+    width: calc(35% - 1.5em);
+    float: right;
+    position: relative;
+    overflow: visible;
+    margin-bottom: -1.5em;
+    padding: 1.5em 0;
+  }
+  .summary #exhibit-pages:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -1.5em;
+    top: 0;
+    bottom: 0;
+    background-color: #DDD;
+    width: 1px;
+  }
+
+  #exhibit-pages > ul > li:not(.parent) li {
+    display: none;
+  }
+
+  #exhibit-pages > ul > li.current li {
+    display: block;
+  }
+
   .summary #content > h1:first-of-type {
     float: left;
     width: 65%;
@@ -1140,6 +1185,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     margin-top: 1.5em;
   }
 
+  #exhibit-pages > ul > li {
+    margin-bottom: 1.5em;
+  }
   #exhibit-pages ul {
     margin: 0;
     padding: 0;
@@ -1176,10 +1224,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     background-color: #706b34;
   }
 
-  .summary #exhibit-pages {
-    padding: 1.5em 0;
-  }
-
   #exhibit-page-navigation {
     border-color: #ddd;
     border-top-width: 0.07143em;
@@ -1205,10 +1249,31 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     margin: 0;
   }
 
-  #primary, #secondary {
+  #primary,
+  #secondary,
+  #exhibit-pages,
+  #sidebar {
     width: 100% !important;
     border-right: 0 !important;
     padding: 0 !important;
+  }
+
+  #exhibit-pages {
+    clear: both;
+  }
+
+  .exhibit #exhibit-pages:after,
+  #content > #primary:not(:only-child):after {
+    background-color: transparent;
+  }
+
+  #content > #primary:not(:only-child) {
+    margin-bottom: 1.5em;
+  }
+
+  #secondary,
+  #sidebar {
+    border-left: 0;
   }
 
   #search-container {
@@ -1217,6 +1282,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   }
 }
 @media screen and (max-width: 480px) {
+  #site-title img {
+    max-width: 100%;
+  }
+
   .navigation {
     position: relative;
   }
@@ -1236,6 +1305,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     border-color: transparent;
   }
 
+  #admin-bar .navigation li {
+    display: inline-block;
+    border-color: transparent;
+  }
+
   .sub-nav.open {
     width: 100%;
     min-width: 0;
@@ -1249,6 +1323,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   .search-entry input[type=text] {
     display: block;
     width: 100%;
+  }
+
+  #content {
+    padding: 1.5em 0;
   }
 }
 @media print {
